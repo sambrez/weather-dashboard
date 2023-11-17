@@ -1,0 +1,25 @@
+header {
+    background-color: rgb(59, 111, 208);
+    color: rgb(234, 232, 228)
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    font-size: 22px;
+}
+
+h4 {
+    font-size: 25px;
+}
+
+.row {
+    display: flex;
+    margin: 15px;
+    padding: 5px;
+}
+
+#form {
+    margin: 15px 15px 15px 0px;
+    padding: 5px 5px 5px 0px;
+}
+
