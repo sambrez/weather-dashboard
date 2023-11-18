@@ -21,7 +21,7 @@
                     <button id="search" class="col-3 btn btn-primary">Submit</button>
                 </form>
                 <div>
-                    <ul></ul>
+                    <ul id="list"></ul>
                 </div>
             </div>
             <div class="col-lg-9 col-md-8 col-lg-2 col-md-2">
@@ -30,11 +30,16 @@
                         <div class="card">
                             <div id="city-name" class="card-title"></div>
                             <div id="date-main" class="card-subtitle"></div>
-                            <div></div>
+                            <div class="card-body">
+                                <p id="temperature"></p>
+                                <p id="humidity"></p>
+                                <p id="wind-speed"></p>
+                            </div>
                         </div>
                     </div>
-                    <div class="col-3">
-                        <span></span>
+                    <div class="col-3 card">
+                        <img id="main-icon" class="card-img-top">
+                        <p id="description" class="card-text"></p>
                     </div>
                 </div>
                 <div class="row">
