@@ -1,25 +1,30 @@
-
+// global variabes
 const button = document.getElementById('search');
 const cityName = document.getElementById('input');
 const buttons = document.getElementById('list');
 const listedCities = document.querySelector('names');
 
+// main function that handles pi fetches and display
 function main(event) {
     event.preventDefault();
     const city = cityName.value;
     getWeather();
 
+    // function that fetches coordinates based on city name
     function getWeather () {
         fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=3&appid=5877f230766a4bb2c1d817ba31e0ff20')
         .then(function (response) {
             return response.json();
         })
         .then(function (data) {
+            // establishes coordinates of city
             let cities = data[0].name
             let longitude = data[0].lon;
             let latitude = data[0].lat;
+            // stores coordinates to local storage with city as key
             let coordinates = latitude.toString() + " " + longitude.toString();
             localStorage.setItem(city, coordinates);
+            // appends button to <ul> for weather recall
             buttonElement = document.createElement('button');
             buttonElement.setAttribute('id', cities);
             buttonElement.setAttribute('class', 'names');
@@ -27,6 +32,7 @@ function main(event) {
             buttonElement.textContent = cities;
             buttons.appendChild(buttonElement);
 
+            // function that fetches the weather based on coordinates
             fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=5877f230766a4bb2c1d817ba31e0ff20&units=imperial')
                 .then(function (response) {
                     return response.json();
@@ -34,6 +40,7 @@ function main(event) {
                 .then(function (data) {
                     console.log(data);
 
+                    // displays city, date, and weather conditions of main card
                     let date = dayjs()
                     const displayCity = document.getElementById('city-name');
                     displayCity.textContent = data.city.name;
@@ -55,12 +62,14 @@ function main(event) {
                     const iconDescription = document.getElementById('description');
                     iconDescription.textContent = data.list[0].weather[0].description;
 
+                    // establishes dates of five-day forecast cards
                     const dayOne = date.add(1, 'day');
                     const dayTwo = date.add(2, 'day');
                     const dayThree = date.add(3, 'day');
                     const dayFour = date.add(4, 'day');
                     const dayFive = date.add(5, 'day');
 
+                    // displays dates of five-day forecast
                     const dateOne = document.getElementById('day-one');
                     dateOne.textContent = dayOne.format('MM/DD/YYYY');
                     const dateTwo = document.getElementById('day-two');
@@ -72,6 +81,7 @@ function main(event) {
                     const dateFive = document.getElementById('day-five');
                     dateFive.textContent = dayFive.format('MM/DD/YYYY');
 
+                    // displays weather icon for five-day forecast
                     const iconOne = document.getElementById('img1');
                     iconOne.src = href = 'https://openweathermap.org/img/wn/' + data.list[5].weather[0].icon + '@2x.png';
                     const iconTwo = document.getElementById('img2');
@@ -83,6 +93,7 @@ function main(event) {
                     const iconFive = document.getElementById('img5');
                     iconFive.src = href = 'https://openweathermap.org/img/wn/' + data.list[37].weather[0].icon + '@2x.png';
 
+                    // displays temperatures for five-day forecast
                     const temp1 = document.getElementById('temp1');
                     temp1.textContent = 'Temperature: ' + data.list[5].main.temp + "°F";
                     const temp2 = document.getElementById('temp2');
@@ -94,6 +105,7 @@ function main(event) {
                     const temp5 = document.getElementById('temp5');
                     temp5.textContent = 'Temperature: ' + data.list[37].main.temp + "°F";
 
+                    // displays humidity for five-day forecast
                     const hum1 = document.getElementById('hum1');
                     hum1.textContent = 'Humidity: ' + data.list[5].main.humidity + "%";
                     const hum2 = document.getElementById('hum2');
@@ -105,6 +117,7 @@ function main(event) {
                     const hum5 = document.getElementById('hum5');
                     hum5.textContent = 'Humidity: ' + data.list[37].main.humidity + "%";
 
+                    // displays wind speed for five-day forecast
                     const ws1 = document.getElementById('ws1');
                     ws1.textContent = 'Wind Speed: ' + data.list[5].wind.speed + " mph";
                     const ws2 = document.getElementById('ws2');
@@ -118,11 +131,14 @@ function main(event) {
 
                 })
         })
+        // resets text entry
     form.reset();
     }
 }
 
+// function that handles the call to and display from local storage from button list event listener
 function recallCity(event) {
+    // matches value of clicked button to local storage key and sets array
     let savedCities = event.target.value;
     for (let i = 0; i < localStorage.length; i++) {
         if (localStorage.key(i).toLowerCase()==savedCities.toLowerCase()) {
@@ -131,6 +147,7 @@ function recallCity(event) {
             let latitude = coordinateArray[0];
             let longitude = coordinateArray[1];
             
+            // fetches weather rom coordinates established in above array and displays - see commetns from function main()
             fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=5877f230766a4bb2c1d817ba31e0ff20&units=imperial')
                 .then(function (response) {
                     return response.json();
@@ -223,5 +240,7 @@ function recallCity(event) {
     }
 }
 
+// event listener from the city search button
 button.addEventListener('click', main);
+// event listener from the city history buttons
 buttons.addEventListener('click', recallCity);
