@@ -12,7 +12,7 @@ function main(event) {
 
     // function that fetches coordinates based on city name
     function getWeather() {
-        fetch('http://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=3&appid=5877f230766a4bb2c1d817ba31e0ff20')
+        fetch('https://api.openweathermap.org/geo/1.0/direct?q=' + city + '&limit=3&appid=5877f230766a4bb2c1d817ba31e0ff20')
             .then(function (response) {
                 return response.json();
             })
