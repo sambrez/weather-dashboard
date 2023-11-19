@@ -6,8 +6,6 @@
 // url for city name to coordinate conversion
 // http://api.openweathermap.org/geo/1.0/direct?q={city name}&limit={limit}&appid=5877f230766a4bb2c1d817ba31e0ff20
 
-
-// const input = document.getElementById('input').value;
 const button = document.getElementById('search');
 const cityName = document.getElementById('input');
 
@@ -27,12 +25,13 @@ function getWeather(event) {
             // console.log(cities);
             let longitude = data[0].lon;
             let latitude = data[0].lat;
-            localStorage.setItem('longitude', longitude);
-            localStorage.setItem('latitude', latitude);
-            listElement = document.createElement('li');
-            listElement.textContent = cities;
-            const list = document.getElementById('list');
-            list.appendChild(listElement);
+            let coordinates = latitude.toString() + " " + longitude.toString();
+            localStorage.setItem(city, coordinates);
+            buttonElement = document.createElement('button');
+            buttonElement.value = cities;
+            buttonElement.textContent = cities;
+            const buttons = document.getElementById('list');
+            buttons.appendChild(buttonElement);
 
             fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=5877f230766a4bb2c1d817ba31e0ff20&units=imperial')
                 .then(function (response) {
@@ -125,6 +124,7 @@ function getWeather(event) {
 
                 })
         })
+    form.reset();
 }
 
 button.addEventListener('click', getWeather);
