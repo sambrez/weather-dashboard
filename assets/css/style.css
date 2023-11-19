@@ -1,15 +1,16 @@
-header {
-    background-color: rgb(59, 111, 208);
-    color: rgb(234, 232, 228)
-}
-
 body {
     font-family: 'Open Sans', sans-serif;
     font-size: 22px;
 }
 
+header {
+    background-color: rgb(59, 111, 208);
+    color: rgb(234, 232, 228)
+}
+
 h4 {
     font-size: 25px;
+    text-align: center;
 }
 
 .row {
@@ -18,8 +19,64 @@ h4 {
     padding: 5px;
 }
 
+.card {
+    border: 0px;
+}
+
+.card-text {
+    font-size: 14px;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#city-name {
+    font-size: 60px;
+    padding: 6px;
+}
+
+#date-main {
+    font-size: 30px;
+    padding: 2px;
+}
+
 #form {
     margin: 15px 15px 15px 0px;
     padding: 5px 5px 5px 0px;
 }
 
+#list {
+    padding: 0px;
+}
+
+#fiveday {
+    font-size: 40px;
+}
+
+#description {
+    color: white;
+    text-align: center;
+    font-size: 22px;
+}
+
+/* class of buttons added to ul from javascript */
+.names {
+    width: 100%;
+    background-color: rgb(162, 162, 162);
+    color: white;
+    text-align: center;
+    border: 0px;
+    border-radius: 15px;
+    align-items: right;
+    margin: 5px;
+}
+
+/* class added from javascript */
+.bg-color {
+    background-color: rgb(59, 111, 208);
+}
+
+/* class added from javascript */
+.border {
+    border-width: 4px;
+    border-color: rgb(59, 111, 208);
+}
