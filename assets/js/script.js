@@ -7,7 +7,8 @@ const listedCities = document.querySelector('names');
 // main function that handles pi fetches and display
 function main(event) {
     event.preventDefault();
-    const city = cityName.value;
+    const input = cityName.value;
+    const city = input.toLowerCase();
     getWeather();
 
     // function that fetches coordinates based on city name
@@ -154,13 +155,13 @@ function recallCity(event) {
     // matches value of clicked button to local storage key and sets array
     let savedCities = event.target.value;
     for (let i = 0; i < localStorage.length; i++) {
-        if (localStorage.key(i).toLowerCase() == savedCities.toLowerCase()) {
+        if (localStorage.key(i).toLowerCase() === savedCities.toLowerCase()) {
             let savedCoordinates = localStorage.getItem(savedCities.toLowerCase());
             let coordinateArray = savedCoordinates.split(" ");
             let latitude = coordinateArray[0];
             let longitude = coordinateArray[1];
 
-            // fetches weather from coordinates established in above array and displays - see commetns from function main()
+            // fetches weather from coordinates established in above array and displays - see comments from function main()
             fetch('https://api.openweathermap.org/data/2.5/forecast?lat=' + latitude + '&lon=' + longitude + '&appid=5877f230766a4bb2c1d817ba31e0ff20&units=imperial')
                 .then(function (response) {
                     return response.json();
